@@ -38,7 +38,7 @@
   "main": "index.js",
   "name": "react-native-ios-settings-bundle",
   "peerDependencies": {
-    "react-native": "^0.41.2",
+    "react-native": "^0.67.4",
     "react-native-windows": "0.41.0-rc.1"
   },
   "scripts": {
