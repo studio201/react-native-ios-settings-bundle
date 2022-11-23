@@ -4,11 +4,11 @@ import { NativeModules,Platform } from 'react-native';
 const { RNIosSettingsBundle } = NativeModules;
 
 export default {
-    get: (key,callback) =>
+    get: (key) =>
     {
-          if(Platform == 'android')
+        if(Platform == 'android')
             return callback([1,'it works only on ios!']);
 
-        RNIosSettingsBundle.getValByKey(key,callback);
+        return RNIosSettingsBundle.getValByKey(key);
     }
 };

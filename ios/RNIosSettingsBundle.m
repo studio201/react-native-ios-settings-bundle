@@ -4,18 +4,19 @@
 
 @implementation RNIosSettingsBundle
 
-- (dispatch_queue_t)methodQueue
+/*- (dispatch_queue_t)methodQueue
 {
     return dispatch_get_main_queue();
-}
+}*/
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(getValByKey:(NSString *)key  callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getValByKey:(NSString *)key)
 {
     NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
+
     if(!settingsBundle) {
         NSLog(@"Could not find Settings.bundle");
-        return;
+        return [NSNull null];
     }
 
     NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
@@ -33,11 +34,13 @@ RCT_EXPORT_METHOD(getValByKey:(NSString *)key  callback:(RCTResponseSenderBlock)
 
     if([defaults objectForKey:key] == nil){
         NSString *result = [NSString stringWithFormat:@"value  is empty or the key %@ is not defined!!%@!!", key, [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-        callback(@[ @[ @true , result] , [NSNull null]]);
+        //callback(@[ @[ @true , result] , [NSNull null]]);
+        return [NSNull null];
     }
 
     else
-        callback(@[[NSNull null], [defaults objectForKey:key]]);
+        //callback(@[[NSNull null], [defaults objectForKey:key]]);
+        return [defaults objectForKey:key];
 }
 
 @end

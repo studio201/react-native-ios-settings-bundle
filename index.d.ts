@@ -1,6 +1,6 @@
 declare var SettingsBundle: {
-    
-    get: (key: string, callback: (err: string, value: string) => void) => void;
+
+    get: (key: string) => void;
 
 };
 
